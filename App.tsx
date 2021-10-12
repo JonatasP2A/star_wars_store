@@ -1,21 +1,32 @@
 import { StatusBar } from 'expo-status-bar';
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import React, { useState } from 'react';
+import { ThemeProvider, DefaultTheme } from 'styled-components';
+import { Home } from './src/pages/Home';
+import { droid, darkSide, lightSide } from './src/styles/themes';
+
+type Theme = 'droid' | 'darkSide' | 'lightSide';
 
 export default function App() {
+  const [theme, setTheme] = useState<DefaultTheme>();
+
+  const handleTheme = (theme: Theme) => {
+    switch (theme) {
+      case 'droid':
+        setTheme(droid);
+        break;
+      case 'darkSide':
+        setTheme(darkSide);
+        break;
+      case 'lightSide':
+        setTheme(lightSide);
+        break;
+    }
+  };
+
   return (
-    <View style={styles.container}>
-      <Text>Open up App.tsx to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <ThemeProvider theme={lightSide}>
+      <StatusBar />
+      <Home />
+    </ThemeProvider>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
