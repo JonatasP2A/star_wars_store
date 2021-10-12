@@ -33,4 +33,5 @@ export const Text = styled.Text`
   color: ${({ theme }) => theme.colors.white};
   font-size: ${RFValue(10)}px;
   font-weight: bold;
+  font-family: CenturyGothic-Regular;
 `;

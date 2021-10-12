@@ -20,7 +20,8 @@ export const Image = styled.Image`
 
 export const ProductName = styled.Text`
   color: ${({ theme }) => theme.colors.primary};
-  font-size: ${RFValue(14)}px;
+  font-size: ${RFValue(12)}px;
+  font-family: CenturyGothic-Regular;
 `;
 
 export const ProductPrice = styled(ProductName)`
