@@ -19,7 +19,7 @@ import {
 
 export const Login = () => {
   const theme = useContext(ThemeContext);
-  const { signInWithGoogle, signInWithApple } = useAuth();
+  const { signInWithGoogle, signInWithApple, signInWithFacebook } = useAuth();
 
   const handleSignInWithGoogle = async () => {
     try {
@@ -35,7 +35,16 @@ export const Login = () => {
       await signInWithApple();
     } catch (error) {
       console.log(error);
-      Alert.alert('Não foi possível se conectar com a Apple');
+      Alert.alert(`${error.message}`);
+    }
+  };
+
+  const handleSignInWithFacebook = async () => {
+    try {
+      await signInWithFacebook();
+    } catch (error) {
+      console.log(error);
+      Alert.alert('Não foi possível se conectar com o Facebook');
     }
   };
 
@@ -67,7 +76,7 @@ export const Login = () => {
             <Apple />
           </BoxLogo>
         )}
-        <BoxLogo>
+        <BoxLogo onPress={handleSignInWithFacebook}>
           <Facebook />
         </BoxLogo>
       </LoginContainer>

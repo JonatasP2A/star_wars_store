@@ -3,6 +3,7 @@
     "name": "star_wars_store",
     "slug": "star_wars_store",
     "scheme": "star-wars-store",
+    "facebookScheme": "fb411255490623627",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -28,6 +29,8 @@
     },
     "web": {
       "favicon": "./assets/favicon.png"
-    }
+    },
+    "description": "",
+    "githubUrl": "https://github.com/JonatasP2A/star_wars_store"
   }
 }

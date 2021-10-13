@@ -1,6 +1,7 @@
 import React, { createContext, useContext, useState } from 'react';
 import * as AuthSession from 'expo-auth-session';
 import * as AppleAuthentication from 'expo-apple-authentication';
+import * as Facebook from 'expo-facebook';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 interface AuthProviderProps {
@@ -18,6 +19,7 @@ interface IAuthContextData {
   user: User;
   signInWithGoogle: () => Promise<void>;
   signInWithApple: () => Promise<void>;
+  signInWithFacebook: () => Promise<void>;
 }
 
 interface AuthorizationResponse {
@@ -98,12 +100,46 @@ const AuthProvider = ({ children }: AuthProviderProps) => {
     }
   };
 
+  const signInWithFacebook = async () => {
+    try {
+      await Facebook.initializeAsync({
+        appId: '411255490623627',
+      });
+      const credential = await Facebook.logInWithReadPermissionsAsync({
+        permissions: ['public_profile', 'email'],
+      });
+      if (credential.type === 'success') {
+        const response = await fetch(
+          `https://graph.facebook.com/me?fields=id,name,picture.type(large),email&access_token=${credential.token}`
+        );
+
+        const data = await response.json();
+
+        const userLogged = {
+          id: String(data.id),
+          email: data.email,
+          name: data.name,
+          photo: data.picture.data.url,
+        };
+
+        setUser(userLogged);
+        await AsyncStorage.setItem(
+          '@star-wars-store:user',
+          JSON.stringify(userLogged)
+        );
+      }
+    } catch (error) {
+      throw new Error(error);
+    }
+  };
+
   return (
     <AuthContext.Provider
       value={{
         user,
         signInWithGoogle,
         signInWithApple,
+        signInWithFacebook,
       }}
     >
       {children}
