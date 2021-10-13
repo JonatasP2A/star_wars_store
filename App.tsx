@@ -36,7 +36,7 @@ export default function App() {
     <ThemeProvider theme={lightSide}>
       <LoadAssets fonts={fonts}>
         <AuthProvider>
-          <Login />
+          <Home />
         </AuthProvider>
       </LoadAssets>
     </ThemeProvider>
