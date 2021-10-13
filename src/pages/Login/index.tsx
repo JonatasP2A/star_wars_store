@@ -1,6 +1,8 @@
 import React, { useContext } from 'react';
+import { Alert, Platform } from 'react-native';
 import { ThemeContext } from 'styled-components';
 import { Apple, Facebook, Google, LogoBigger } from '../../assets/icons';
+import { useAuth } from '../../hooks/auth';
 
 import {
   Container,
@@ -17,6 +19,25 @@ import {
 
 export const Login = () => {
   const theme = useContext(ThemeContext);
+  const { signInWithGoogle, signInWithApple } = useAuth();
+
+  const handleSignInWithGoogle = async () => {
+    try {
+      await signInWithGoogle();
+    } catch (error) {
+      console.log(error);
+      Alert.alert('Não foi possível se conectar com o Google');
+    }
+  };
+
+  const handleSignInWithApple = async () => {
+    try {
+      await signInWithApple();
+    } catch (error) {
+      console.log(error);
+      Alert.alert('Não foi possível se conectar com a Apple');
+    }
+  };
 
   return (
     <Container
@@ -38,12 +59,14 @@ export const Login = () => {
       </Content>
 
       <LoginContainer>
-        <BoxLogo>
+        <BoxLogo onPress={handleSignInWithGoogle} margin>
           <Google />
         </BoxLogo>
-        <BoxLogo>
-          <Apple />
-        </BoxLogo>
+        {Platform.OS === 'ios' && (
+          <BoxLogo onPress={handleSignInWithApple} margin>
+            <Apple />
+          </BoxLogo>
+        )}
         <BoxLogo>
           <Facebook />
         </BoxLogo>

@@ -1,5 +1,9 @@
+import styled, { css } from 'styled-components/native';
 import { RFValue } from 'react-native-responsive-fontsize';
-import styled from 'styled-components/native';
+
+interface BoxLogoProps {
+  margin?: boolean;
+}
 
 export const Container = styled.ImageBackground`
   flex: 1;
@@ -51,15 +55,14 @@ export const Text = styled.Text`
 `;
 
 export const LoginContainer = styled.View`
-  width: 100%;
   flex-direction: row;
   align-items: center;
-  justify-content: space-between;
+  justify-content: center;
 
-  padding: ${RFValue(24)}px ${RFValue(60)}px ${RFValue(60)}px;
+  padding: ${RFValue(24)}px 0 ${RFValue(60)}px;
 `;
 
-export const BoxLogo = styled.TouchableOpacity`
+export const BoxLogo = styled.TouchableOpacity<BoxLogoProps>`
   width: ${RFValue(48)}px;
   height: ${RFValue(48)}px;
   border-radius: ${RFValue(24)}px;
@@ -67,4 +70,10 @@ export const BoxLogo = styled.TouchableOpacity`
   align-items: center;
   justify-content: center;
   background-color: ${({ theme }) => theme.colors.white};
+
+  ${({ margin }) =>
+    margin &&
+    css`
+      margin-right: ${RFValue(36)}px;
+    `}
 `;

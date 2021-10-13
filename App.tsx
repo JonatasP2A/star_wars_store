@@ -1,8 +1,8 @@
-import { StatusBar } from 'expo-status-bar';
 import React, { useState } from 'react';
 import { ThemeProvider, DefaultTheme } from 'styled-components';
 
 import LoadAssets from './src/container/LoadAssets';
+import { AuthProvider } from './src/hooks/auth';
 import { Home } from './src/pages/Home';
 import { Login } from './src/pages/Login';
 import { droid, darkSide, lightSide } from './src/styles/themes';
@@ -35,7 +35,9 @@ export default function App() {
   return (
     <ThemeProvider theme={lightSide}>
       <LoadAssets fonts={fonts}>
-        <Login />
+        <AuthProvider>
+          <Login />
+        </AuthProvider>
       </LoadAssets>
     </ThemeProvider>
   );
