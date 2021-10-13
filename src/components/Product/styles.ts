@@ -6,7 +6,7 @@ const { width } = Dimensions.get('window');
 
 const IMAGE_SIZE = (width - RFValue(64)) / 2;
 
-export const Container = styled.View`
+export const Container = styled.TouchableOpacity`
   flex: 1;
   margin-bottom: ${RFValue(12)}px;
 `;

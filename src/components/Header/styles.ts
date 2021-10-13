@@ -10,7 +10,7 @@ export const Container = styled.View`
   justify-content: space-around;
 `;
 
-export const Cart = styled.View`
+export const Cart = styled.TouchableOpacity`
   position: relative;
 `;
 

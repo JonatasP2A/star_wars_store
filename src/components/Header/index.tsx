@@ -1,4 +1,5 @@
 import React, { useContext } from 'react';
+import { TouchableOpacity } from 'react-native';
 import { Feather } from '@expo/vector-icons';
 import { RFValue } from 'react-native-responsive-fontsize';
 import { ThemeContext } from 'styled-components';
@@ -15,13 +16,15 @@ export const Header = () => {
     <Container>
       <StatusBar />
 
-      {theme.title === 'droid' ? (
-        <Robot />
-      ) : theme.title === 'darkSide' ? (
-        <Stormtrooper />
-      ) : (
-        <Yoda />
-      )}
+      <TouchableOpacity>
+        {theme.title === 'droid' ? (
+          <Robot />
+        ) : theme.title === 'darkSide' ? (
+          <Stormtrooper />
+        ) : (
+          <Yoda />
+        )}
+      </TouchableOpacity>
 
       <Logo color={theme.colors.primary} />
       <Cart>
