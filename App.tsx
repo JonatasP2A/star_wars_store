@@ -4,6 +4,7 @@ import { ThemeProvider, DefaultTheme } from 'styled-components';
 
 import LoadAssets from './src/container/LoadAssets';
 import { Home } from './src/pages/Home';
+import { Login } from './src/pages/Login';
 import { droid, darkSide, lightSide } from './src/styles/themes';
 
 type Theme = 'droid' | 'darkSide' | 'lightSide';
@@ -34,7 +35,7 @@ export default function App() {
   return (
     <ThemeProvider theme={lightSide}>
       <LoadAssets fonts={fonts}>
-        <Home />
+        <Login />
       </LoadAssets>
     </ThemeProvider>
   );
