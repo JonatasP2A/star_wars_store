@@ -1,22 +1,20 @@
-import React, { useContext, useCallback, useEffect, useState } from 'react';
+import { NativeStackScreenProps } from '@react-navigation/native-stack';
+import React, { useCallback, useEffect, useState } from 'react';
 import { FlatList } from 'react-native';
 import { RFValue } from 'react-native-responsive-fontsize';
-import { ThemeContext } from 'styled-components/native';
-import { Header, Product } from '../../components';
+import { Header, Product, Background } from '../../components';
+import { RootStackParamList } from '../../routes/app.routes';
 import { getProducts } from '../../services/api';
 import { ProductType } from '../../types/product';
 
-import { Container, Text } from './styles';
+type Props = NativeStackScreenProps<RootStackParamList, 'Home'>;
 
-export const Home = () => {
+export const Home = ({ navigation }: Props) => {
   const [products, setProducts] = useState<ProductType[]>([]);
-
-  const theme = useContext(ThemeContext);
 
   const getData = useCallback(async () => {
     try {
       const response = await getProducts();
-      // console.log(response);
       setProducts(response.data as ProductType[]);
     } catch (e) {
       console.log(e);
@@ -28,8 +26,8 @@ export const Home = () => {
   }, []);
 
   return (
-    <Container colors={[theme.colors.background, theme.colors.black]}>
-      <Header />
+    <Background>
+      <Header navigation={navigation} />
       <FlatList
         data={products}
         keyExtractor={(item) => item.title}
@@ -41,6 +39,6 @@ export const Home = () => {
           paddingHorizontal: RFValue(24),
         }}
       />
-    </Container>
+    </Background>
   );
 };

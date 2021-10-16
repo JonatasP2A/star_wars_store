@@ -1,13 +1,8 @@
-import React, { useState } from 'react';
-import { ThemeProvider, DefaultTheme } from 'styled-components';
+import React from 'react';
 
 import LoadAssets from './src/container/LoadAssets';
-import { AuthProvider } from './src/hooks/auth';
-import { Home } from './src/pages/Home';
-import { Login } from './src/pages/Login';
-import { droid, darkSide, lightSide } from './src/styles/themes';
-
-type Theme = 'droid' | 'darkSide' | 'lightSide';
+import AppProvider from './src/hooks';
+import Routes from './src/routes';
 
 const fonts = {
   'CenturyGothic-Regular': require('./assets/fonts/CenturyGothicRegular.ttf'),
@@ -16,29 +11,11 @@ const fonts = {
 };
 
 export default function App() {
-  const [theme, setTheme] = useState<DefaultTheme>();
-
-  const handleTheme = (theme: Theme) => {
-    switch (theme) {
-      case 'droid':
-        setTheme(droid);
-        break;
-      case 'darkSide':
-        setTheme(darkSide);
-        break;
-      case 'lightSide':
-        setTheme(lightSide);
-        break;
-    }
-  };
-
   return (
-    <ThemeProvider theme={lightSide}>
+    <AppProvider>
       <LoadAssets fonts={fonts}>
-        <AuthProvider>
-          <Home />
-        </AuthProvider>
+        <Routes />
       </LoadAssets>
-    </ThemeProvider>
+    </AppProvider>
   );
 }

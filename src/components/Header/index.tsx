@@ -9,14 +9,26 @@ import { Yoda, Robot, Stormtrooper, Logo } from '../../assets/icons';
 
 import { Container, Cart, Circle, Text } from './styles';
 
-export const Header = () => {
+interface HeaderProps {
+  navigation: any;
+}
+
+export const Header = ({ navigation }: HeaderProps) => {
   const theme = useContext(ThemeContext);
+
+  const handleNavigateToThemes = () => {
+    navigation.navigate('Themes');
+  };
+
+  const handleGoBack = () => {
+    navigation.navigate('Home');
+  };
 
   return (
     <Container>
       <StatusBar />
 
-      <TouchableOpacity>
+      <TouchableOpacity onPress={handleNavigateToThemes}>
         {theme.title === 'droid' ? (
           <Robot />
         ) : theme.title === 'darkSide' ? (

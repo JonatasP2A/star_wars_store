@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState } from 'react';
+import React, { createContext, useContext, useState, useEffect } from 'react';
 import * as AuthSession from 'expo-auth-session';
 import * as AppleAuthentication from 'expo-apple-authentication';
 import * as Facebook from 'expo-facebook';
@@ -20,6 +20,7 @@ interface IAuthContextData {
   signInWithGoogle: () => Promise<void>;
   signInWithApple: () => Promise<void>;
   signInWithFacebook: () => Promise<void>;
+  logOut: () => Promise<void>;
 }
 
 interface AuthorizationResponse {
@@ -33,6 +34,7 @@ export const AuthContext = createContext({} as IAuthContextData);
 
 const { CLIENT_ID } = process.env;
 const { REDIRECT_URI } = process.env;
+const { APP_ID } = process.env;
 
 const AuthProvider = ({ children }: AuthProviderProps) => {
   const [user, setUser] = useState<User>({} as User);
@@ -103,7 +105,7 @@ const AuthProvider = ({ children }: AuthProviderProps) => {
   const signInWithFacebook = async () => {
     try {
       await Facebook.initializeAsync({
-        appId: '411255490623627',
+        appId: APP_ID,
       });
       const credential = await Facebook.logInWithReadPermissionsAsync({
         permissions: ['public_profile', 'email'],
@@ -133,6 +135,24 @@ const AuthProvider = ({ children }: AuthProviderProps) => {
     }
   };
 
+  const logOut = async () => {
+    setUser({} as User);
+    await AsyncStorage.removeItem('@star-wars-store:user');
+  };
+
+  const verifyUserInAsyncStorage = async () => {
+    const storage = await AsyncStorage.getItem('@star-wars-store:user');
+
+    if (storage) {
+      const userLogged = JSON.parse(storage) as User;
+      setUser(userLogged);
+    }
+  };
+
+  useEffect(() => {
+    verifyUserInAsyncStorage();
+  }, []);
+
   return (
     <AuthContext.Provider
       value={{
@@ -140,6 +160,7 @@ const AuthProvider = ({ children }: AuthProviderProps) => {
         signInWithGoogle,
         signInWithApple,
         signInWithFacebook,
+        logOut,
       }}
     >
       {children}
