@@ -1,9 +1,13 @@
 import { Dimensions } from 'react-native';
-import styled from 'styled-components/native';
+import styled, { css } from 'styled-components/native';
 import Constants from 'expo-constants';
 import { RFValue } from 'react-native-responsive-fontsize';
 
 const { height, width } = Dimensions.get('window');
+
+interface CardTextProps {
+  remove?: boolean;
+}
 
 export const Image = styled.Image`
   height: ${height * 0.45}px;
@@ -23,7 +27,7 @@ export const IconButton = styled.TouchableOpacity`
   width: ${RFValue(35)}px;
   height: ${RFValue(35)}px;
   border-radius: ${RFValue(17.5)}px;
-  background-color: ${({ theme }) => theme.colors.white};
+  background-color: ${({ theme }) => theme.colors.background};
 
   align-items: center;
   justify-content: center;
@@ -78,12 +82,13 @@ export const CardButton = styled.TouchableOpacity`
   align-items: center;
   padding: ${RFValue(12)}px;
   border-radius: ${RFValue(30)}px;
-  background-color: ${({ theme }) => theme.colors.primary}; ;
+  background-color: ${({ theme }) => theme.colors.primary};
 `;
 
-export const CardText = styled.Text`
-  color: ${({ theme }) => theme.colors.black};
+export const CardText = styled.Text<CardTextProps>`
+  color: ${({ theme, remove }) => (remove ? '#E3656E' : theme.colors.black)};
   font-size: ${RFValue(12)}px;
   font-family: CenturyGothic-Bold;
   margin-left: ${RFValue(8)}px;
+  text-align: center;
 `;

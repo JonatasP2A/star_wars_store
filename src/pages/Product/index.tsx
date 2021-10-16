@@ -4,9 +4,12 @@ import { ThemeContext } from 'styled-components';
 import { RFValue } from 'react-native-responsive-fontsize';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { RootStackParamList } from '../../routes/app.routes';
+
+import { useCart } from '../../hooks/cart';
+import { Background } from '../../components';
+
 import { currencyFormat } from '../../utils/format';
 
-import { Background } from '../../components';
 import * as S from './styles';
 
 type Props = NativeStackScreenProps<RootStackParamList, 'Product'>;
@@ -14,14 +17,23 @@ type Props = NativeStackScreenProps<RootStackParamList, 'Product'>;
 export const Product = ({ route, navigation }: Props) => {
   const { product } = route.params;
   const theme = useContext(ThemeContext);
+  const { products, addToCart, removeToCart } = useCart();
+
+  const handleAdd = () => {
+    addToCart(product);
+  };
+
+  const handleRemove = () => {
+    removeToCart(product);
+  };
 
   return (
     <Background>
-      <S.IconButton onPress={() => navigation.navigate('Home')}>
+      <S.IconButton onPress={() => navigation.goBack()}>
         <Feather
-          name="chevron-left"
+          name="arrow-left"
           size={RFValue(24)}
-          color={theme.colors.black}
+          color={theme.colors.white}
         />
       </S.IconButton>
       <S.Image source={{ uri: product.thumbnailHd }} />
@@ -41,14 +53,24 @@ export const Product = ({ route, navigation }: Props) => {
         <S.Footer>
           <S.PriceText>{currencyFormat(product.price)}</S.PriceText>
 
-          <S.CardButton>
-            <Feather
-              name="shopping-cart"
-              size={24}
-              color={theme.colors.black}
-            />
-            <S.CardText>Adicionar ao carrinho</S.CardText>
-          </S.CardButton>
+          {products.find((item) => item.title === product.title) ? (
+            <S.CardButton
+              onPress={handleRemove}
+              style={{ backgroundColor: 'transparent' }}
+            >
+              <Feather name="trash" size={RFValue(16)} color="#E3656E" />
+              <S.CardText remove>Remover do carrinho</S.CardText>
+            </S.CardButton>
+          ) : (
+            <S.CardButton onPress={handleAdd}>
+              <Feather
+                name="shopping-cart"
+                size={RFValue(16)}
+                color={theme.colors.black}
+              />
+              <S.CardText>Adicionar ao carrinho</S.CardText>
+            </S.CardButton>
+          )}
         </S.Footer>
       </S.Container>
     </Background>

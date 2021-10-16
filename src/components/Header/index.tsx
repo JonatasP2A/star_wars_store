@@ -7,6 +7,7 @@ import { ThemeContext } from 'styled-components';
 import { Yoda, Robot, Stormtrooper, Logo } from '../../assets/icons';
 
 import { Container, Cart, Circle, Text } from './styles';
+import { useCart } from '../../hooks/cart';
 
 interface HeaderProps {
   navigation: any;
@@ -14,6 +15,7 @@ interface HeaderProps {
 
 export const Header = ({ navigation }: HeaderProps) => {
   const theme = useContext(ThemeContext);
+  const { products } = useCart();
 
   const handleNavigateToThemes = () => {
     navigation.navigate('Profile');
@@ -39,7 +41,7 @@ export const Header = ({ navigation }: HeaderProps) => {
           color={theme.colors.white}
         />
         <Circle>
-          <Text>0</Text>
+          <Text>{products.length}</Text>
         </Circle>
       </Cart>
     </Container>
