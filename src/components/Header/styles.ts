@@ -4,8 +4,6 @@ import { RFValue } from 'react-native-responsive-fontsize';
 
 export const Container = styled.View`
   flex-direction: row;
-  padding-top: ${Constants.statusBarHeight + RFValue(16)}px;
-
   align-items: center;
   justify-content: space-around;
 `;

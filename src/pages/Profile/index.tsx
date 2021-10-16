@@ -8,9 +8,9 @@ import { Background, BoxTheme } from '../../components';
 
 import { Header, IconButton, HeaderText, Container } from './styles';
 
-type Props = NativeStackScreenProps<RootStackParamList, 'Themes'>;
+type Props = NativeStackScreenProps<RootStackParamList, 'Profile'>;
 
-export const Themes = ({ navigation }: Props) => {
+export const Profile = ({ navigation }: Props) => {
   return (
     <Background>
       <Header>

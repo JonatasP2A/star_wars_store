@@ -36,7 +36,7 @@ export const Home = ({ navigation }: Props) => {
         showsVerticalScrollIndicator={false}
         contentContainerStyle={{
           paddingVertical: RFValue(24),
-          paddingHorizontal: RFValue(24),
+          justifyContent: 'space-between',
         }}
       />
     </Background>

@@ -17,17 +17,11 @@ export const Header = ({ navigation }: HeaderProps) => {
   const theme = useContext(ThemeContext);
 
   const handleNavigateToThemes = () => {
-    navigation.navigate('Themes');
-  };
-
-  const handleGoBack = () => {
-    navigation.navigate('Home');
+    navigation.navigate('Profile');
   };
 
   return (
     <Container>
-      <StatusBar />
-
       <TouchableOpacity onPress={handleNavigateToThemes}>
         {theme.title === 'droid' ? (
           <Robot />

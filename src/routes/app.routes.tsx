@@ -1,13 +1,13 @@
 import React from 'react';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { Home } from '../pages/Home';
-import { Themes } from '../pages/Themes';
+import { Profile } from '../pages/Profile';
 
 const App = createNativeStackNavigator();
 
 export type RootStackParamList = {
   Home: undefined;
-  Themes: undefined;
+  Profile: undefined;
 };
 
 const AuthRoutes: React.FC = () => (
@@ -17,7 +17,7 @@ const AuthRoutes: React.FC = () => (
     }}
   >
     <App.Screen name="Home" component={Home} />
-    <App.Screen name="Themes" component={Themes} />
+    <App.Screen name="Profile" component={Profile} />
   </App.Navigator>
 );
 
