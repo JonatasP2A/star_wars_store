@@ -6,11 +6,12 @@ import { Container, Image, ProductName, ProductPrice } from './styles';
 
 interface ProductProps {
   product: ProductType;
+  onPress: () => void;
 }
 
-export const Product = ({ product }: ProductProps) => {
+export const Product = ({ product, onPress }: ProductProps) => {
   return (
-    <Container>
+    <Container onPress={onPress}>
       <Image source={{ uri: product.thumbnailHd }} />
 
       <ProductName>{product.title}</ProductName>

@@ -12,6 +12,12 @@ type Props = NativeStackScreenProps<RootStackParamList, 'Home'>;
 export const Home = ({ navigation }: Props) => {
   const [products, setProducts] = useState<ProductType[]>([]);
 
+  const handleSelectProduct = (product: ProductType) => {
+    navigation.navigate('Product', {
+      product,
+    });
+  };
+
   const getData = useCallback(async () => {
     try {
       const response = await getProducts();
@@ -32,7 +38,9 @@ export const Home = ({ navigation }: Props) => {
         data={products}
         keyExtractor={(item) => item.title}
         numColumns={2}
-        renderItem={({ item }) => <Product product={item} />}
+        renderItem={({ item }) => (
+          <Product product={item} onPress={() => handleSelectProduct(item)} />
+        )}
         showsVerticalScrollIndicator={false}
         contentContainerStyle={{
           paddingVertical: RFValue(24),

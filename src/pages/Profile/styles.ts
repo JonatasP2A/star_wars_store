@@ -1,5 +1,4 @@
 import styled from 'styled-components/native';
-import Constants from 'expo-constants';
 import { RFValue } from 'react-native-responsive-fontsize';
 
 export const Header = styled.View`
@@ -20,8 +19,7 @@ export const IconButton = styled.TouchableOpacity`
 export const HeaderText = styled.Text`
   color: ${({ theme }) => theme.colors.white};
   font-size: ${RFValue(20)}px;
-  font-weight: bold;
-  font-family: CenturyGothic-Regular;
+  font-family: CenturyGothic-Bold;
 `;
 
 export const Container = styled.View`

@@ -1,10 +1,17 @@
-import React, { ReactElement, useCallback, useEffect, useState } from 'react';
+import React, {
+  ReactElement,
+  useCallback,
+  useEffect,
+  useState,
+  useContext,
+} from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { Asset } from 'expo-asset';
 import * as Font from 'expo-font';
 import { InitialState, NavigationContainer } from '@react-navigation/native';
 import { StatusBar } from 'expo-status-bar';
 import Constants from 'expo-constants';
+import { ThemeContext } from 'styled-components';
 
 const NAVIGATION_STATE_KEY = `NAVIGATION_STATE_KEY-${Constants.manifest?.sdkVersion}`;
 
@@ -36,9 +43,12 @@ interface LoadAssetsProps {
 }
 
 const LoadAssets = ({ assets, fonts, children }: LoadAssetsProps) => {
+  const theme = useContext(ThemeContext);
+
   const [isNavigationReady, setIsNavigationReady] = useState(!__DEV__);
   const [initialState, setInitialState] = useState<InitialState | undefined>();
   const ready = useLoadAssets(assets || [], fonts || {});
+
   useEffect(() => {
     const restoreState = async () => {
       try {
@@ -68,7 +78,7 @@ const LoadAssets = ({ assets, fonts, children }: LoadAssetsProps) => {
   }
   return (
     <NavigationContainer {...{ onStateChange, initialState }}>
-      <StatusBar />
+      <StatusBar backgroundColor={theme.colors.background} />
       {children}
     </NavigationContainer>
   );

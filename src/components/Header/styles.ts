@@ -1,5 +1,4 @@
 import styled from 'styled-components/native';
-import Constants from 'expo-constants';
 import { RFValue } from 'react-native-responsive-fontsize';
 
 export const Container = styled.View`
@@ -30,6 +29,5 @@ export const Circle = styled.View`
 export const Text = styled.Text`
   color: ${({ theme }) => theme.colors.white};
   font-size: ${RFValue(10)}px;
-  font-weight: bold;
-  font-family: CenturyGothic-Regular;
+  font-family: CenturyGothic-Bold;
 `;

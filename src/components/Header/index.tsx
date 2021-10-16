@@ -3,7 +3,6 @@ import { TouchableOpacity } from 'react-native';
 import { Feather } from '@expo/vector-icons';
 import { RFValue } from 'react-native-responsive-fontsize';
 import { ThemeContext } from 'styled-components';
-import { StatusBar } from 'expo-status-bar';
 
 import { Yoda, Robot, Stormtrooper, Logo } from '../../assets/icons';
 

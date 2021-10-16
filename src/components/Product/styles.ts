@@ -25,5 +25,5 @@ export const ProductName = styled.Text`
 `;
 
 export const ProductPrice = styled(ProductName)`
-  font-weight: bold;
+  font-family: CenturyGothic-Bold;
 `;
