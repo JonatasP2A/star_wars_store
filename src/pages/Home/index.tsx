@@ -18,6 +18,14 @@ export const Home = ({ navigation }: Props) => {
     });
   };
 
+  const handleGoToProfile = () => {
+    navigation.navigate('Profile');
+  };
+
+  const handleGoToCart = () => {
+    navigation.navigate('Cart');
+  };
+
   const getData = useCallback(async () => {
     try {
       const response = await getProducts();
@@ -33,7 +41,7 @@ export const Home = ({ navigation }: Props) => {
 
   return (
     <Background>
-      <Header navigation={navigation} />
+      <Header goToProfile={handleGoToProfile} goToCart={handleGoToCart} />
       <FlatList
         data={products}
         keyExtractor={(item) => item.title}

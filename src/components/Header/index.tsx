@@ -10,20 +10,17 @@ import { Container, Cart, Circle, Text } from './styles';
 import { useCart } from '../../hooks/cart';
 
 interface HeaderProps {
-  navigation: any;
+  goToProfile: () => void;
+  goToCart: () => void;
 }
 
-export const Header = ({ navigation }: HeaderProps) => {
+export const Header = ({ goToProfile, goToCart }: HeaderProps) => {
   const theme = useContext(ThemeContext);
   const { products } = useCart();
 
-  const handleNavigateToThemes = () => {
-    navigation.navigate('Profile');
-  };
-
   return (
     <Container>
-      <TouchableOpacity onPress={handleNavigateToThemes}>
+      <TouchableOpacity onPress={goToProfile}>
         {theme.title === 'droid' ? (
           <Robot />
         ) : theme.title === 'darkSide' ? (
@@ -34,7 +31,7 @@ export const Header = ({ navigation }: HeaderProps) => {
       </TouchableOpacity>
 
       <Logo color={theme.colors.primary} />
-      <Cart>
+      <Cart onPress={goToCart}>
         <Feather
           name="shopping-cart"
           size={RFValue(24)}

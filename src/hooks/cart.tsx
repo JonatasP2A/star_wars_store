@@ -9,6 +9,7 @@ interface ICartContextData {
   products: ProductType[];
   addToCart: (product: ProductType) => void;
   removeToCart: (product: ProductType) => void;
+  totalCart: () => number;
 }
 
 export const CartContext = createContext({} as ICartContextData);
@@ -33,8 +34,22 @@ const CartProvider = ({ children }: CartProviderProps) => {
     setProducts(actualizedProducts);
   };
 
+  const totalCart = () => {
+    if (products.length === 0) {
+      return 0;
+    }
+
+    const total = products
+      .map((product) => product.price)
+      .reduce((acc, cur) => acc + cur);
+
+    return total;
+  };
+
   return (
-    <CartContext.Provider value={{ products, addToCart, removeToCart }}>
+    <CartContext.Provider
+      value={{ products, addToCart, removeToCart, totalCart }}
+    >
       {children}
     </CartContext.Provider>
   );
