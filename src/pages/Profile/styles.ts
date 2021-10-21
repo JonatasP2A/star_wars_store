@@ -2,19 +2,13 @@ import styled from 'styled-components/native';
 import { RFValue } from 'react-native-responsive-fontsize';
 
 export const Header = styled.View`
-  position: relative;
   flex-direction: row;
 
   align-items: center;
-  justify-content: space-around;
+  justify-content: space-between;
 `;
 
-export const IconButton = styled.TouchableOpacity`
-  position: absolute;
-  top: auto;
-  bottom: auto;
-  left: 0;
-`;
+export const IconButton = styled.TouchableOpacity``;
 
 export const HeaderText = styled.Text`
   color: ${({ theme }) => theme.colors.white};

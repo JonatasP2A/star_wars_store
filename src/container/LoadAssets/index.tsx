@@ -1,19 +1,9 @@
-import React, {
-  ReactElement,
-  useCallback,
-  useEffect,
-  useState,
-  useContext,
-} from 'react';
-import AsyncStorage from '@react-native-async-storage/async-storage';
+import React, { ReactElement, useEffect, useState, useContext } from 'react';
 import { Asset } from 'expo-asset';
 import * as Font from 'expo-font';
-import { InitialState, NavigationContainer } from '@react-navigation/native';
+import { NavigationContainer } from '@react-navigation/native';
 import { StatusBar } from 'expo-status-bar';
-import Constants from 'expo-constants';
 import { ThemeContext } from 'styled-components';
-
-const NAVIGATION_STATE_KEY = `NAVIGATION_STATE_KEY-${Constants.manifest?.sdkVersion}`;
 
 type FontSource = Parameters<typeof Font.loadAsync>[0];
 const usePromiseAll = (
@@ -45,39 +35,14 @@ interface LoadAssetsProps {
 const LoadAssets = ({ assets, fonts, children }: LoadAssetsProps) => {
   const theme = useContext(ThemeContext);
 
-  const [isNavigationReady, setIsNavigationReady] = useState(!__DEV__);
-  const [initialState, setInitialState] = useState<InitialState | undefined>();
   const ready = useLoadAssets(assets || [], fonts || {});
 
-  useEffect(() => {
-    const restoreState = async () => {
-      try {
-        const savedStateString = await AsyncStorage.getItem(
-          NAVIGATION_STATE_KEY
-        );
-        const state = savedStateString
-          ? JSON.parse(savedStateString)
-          : undefined;
-        setInitialState(state);
-      } finally {
-        setIsNavigationReady(true);
-      }
-    };
-
-    if (!isNavigationReady) {
-      restoreState();
-    }
-  }, [isNavigationReady]);
-  const onStateChange = useCallback(
-    (state) =>
-      AsyncStorage.setItem(NAVIGATION_STATE_KEY, JSON.stringify(state)),
-    []
-  );
-  if (!ready || !isNavigationReady) {
+  if (!ready) {
     return null;
   }
+
   return (
-    <NavigationContainer {...{ onStateChange, initialState }}>
+    <NavigationContainer>
       <StatusBar backgroundColor={theme.colors.background} />
       {children}
     </NavigationContainer>

@@ -70,6 +70,7 @@ const AuthProvider = ({ children }: AuthProviderProps) => {
         );
       }
     } catch (error) {
+      // @ts-ignore
       throw new Error(error);
     }
   };
@@ -98,6 +99,7 @@ const AuthProvider = ({ children }: AuthProviderProps) => {
         );
       }
     } catch (error) {
+      // @ts-ignore
       throw new Error(error);
     }
   };
@@ -131,6 +133,7 @@ const AuthProvider = ({ children }: AuthProviderProps) => {
         );
       }
     } catch (error) {
+      // @ts-ignore
       throw new Error(error);
     }
   };

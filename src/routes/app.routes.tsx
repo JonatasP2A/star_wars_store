@@ -19,7 +19,7 @@ export type RootStackParamList = {
   Payment: undefined;
 };
 
-const AuthRoutes: React.FC = () => (
+const AppRoutes: React.FC = () => (
   <App.Navigator
     screenOptions={{
       headerShown: false,
@@ -33,4 +33,4 @@ const AuthRoutes: React.FC = () => (
   </App.Navigator>
 );
 
-export default AuthRoutes;
+export default AppRoutes;

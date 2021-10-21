@@ -27,6 +27,12 @@ type Props = NativeStackScreenProps<RootStackParamList, 'Cart'>;
 export const Cart = ({ navigation }: Props) => {
   const { products, totalCart } = useCart();
 
+  const handleContinue = () => {
+    if (products.length > 0) {
+      navigation.navigate('Payment');
+    }
+  };
+
   return (
     <Background>
       <Header>
@@ -57,7 +63,7 @@ export const Cart = ({ navigation }: Props) => {
 
         <Line />
 
-        <Button onPress={() => navigation.navigate('Payment')}>
+        <Button onPress={handleContinue}>
           <ButtonText>CONTINUAR</ButtonText>
         </Button>
       </Footer>

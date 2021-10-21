@@ -1,4 +1,5 @@
 import React from 'react';
+import { Control, useWatch } from 'react-hook-form';
 import { Dimensions, StyleSheet } from 'react-native';
 import Animated, {
   interpolate,
@@ -6,6 +7,7 @@ import Animated, {
 } from 'react-native-reanimated';
 import { RFPercentage } from 'react-native-responsive-fontsize';
 import { Mastercard, Visa } from '../../assets/icons';
+import { FormInputs } from '../../pages/Payment';
 
 import {
   Container,
@@ -27,11 +29,36 @@ import {
 
 interface CardProps {
   x: Animated.SharedValue<number>;
+  control: Control<FormInputs>;
 }
 
 const { width } = Dimensions.get('window');
 
-export const Card = ({ x }: CardProps) => {
+export const Card = ({ x, control }: CardProps) => {
+  const cardNumber = useWatch({
+    control,
+    name: 'cardNumber',
+    defaultValue: 'xxxx xxxx xxxx xxxx',
+  });
+
+  const name = useWatch({
+    control,
+    name: 'name',
+    defaultValue: 'Luke Skywalker',
+  });
+
+  const valid = useWatch({
+    control,
+    name: 'valid',
+    defaultValue: '12/27',
+  });
+
+  const ccv = useWatch({
+    control,
+    name: 'ccv',
+    defaultValue: 'xxx',
+  });
+
   const backStyles = useAnimatedStyle(() => {
     const rotateY = interpolate(x.value, [0, width], [180, 360]);
 
@@ -68,7 +95,7 @@ export const Card = ({ x }: CardProps) => {
             <SmallLine />
             <SmallLine />
             <SmallLine />
-            <Cvv>123</Cvv>
+            <Cvv>{ccv}</Cvv>
           </WhiteLine>
         </Back>
       </Animated.View>
@@ -90,16 +117,16 @@ export const Card = ({ x }: CardProps) => {
               <Mastercard />
             </CreditCardBrand>
           </Top>
-          <CreditCardNumber>4974 3543 1676 9265</CreditCardNumber>
+          <CreditCardNumber>{cardNumber}</CreditCardNumber>
           <Footer>
             <Left>
               <Title>Nome</Title>
-              <Info>Jonatas P A Alves</Info>
+              <Info>{name}</Info>
             </Left>
 
             <Right>
               <Title>Validade</Title>
-              <Info>12/22</Info>
+              <Info>{valid}</Info>
             </Right>
           </Footer>
         </Front>

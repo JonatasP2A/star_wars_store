@@ -1,14 +1,14 @@
 import React from 'react';
 
 import AppRoutes from './app.routes';
+import AuthRoutes from './auth.routes';
 
 import { useAuth } from '../hooks/auth';
-import { Login } from '../pages/Login';
 
 const Routes: React.FC = () => {
   const { user } = useAuth();
 
-  return user.id ? <AppRoutes /> : <Login />;
+  return user.id ? <AppRoutes /> : <AuthRoutes />;
 };
 
 export default Routes;

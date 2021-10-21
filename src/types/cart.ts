@@ -1,5 +1,5 @@
 export interface IPurchase {
-  id_user: string;
+  id_user: number;
   card_number: number;
   value: number;
   cvv: number;

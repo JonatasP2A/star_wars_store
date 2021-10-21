@@ -19,12 +19,12 @@ export const Product = ({ route, navigation }: Props) => {
   const theme = useContext(ThemeContext);
   const { products, addToCart, removeToCart } = useCart();
 
-  const handleAdd = () => {
-    addToCart(product);
+  const handleAdd = async () => {
+    await addToCart(product);
   };
 
-  const handleRemove = () => {
-    removeToCart(product);
+  const handleRemove = async () => {
+    await removeToCart(product);
   };
 
   return (

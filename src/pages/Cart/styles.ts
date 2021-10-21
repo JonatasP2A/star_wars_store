@@ -54,6 +54,7 @@ export const Button = styled.TouchableOpacity`
   background-color: ${({ theme }) => theme.colors.secondary};
 
   margin: 0 auto;
+  border-radius: ${RFValue(8)}px;
 `;
 
 export const ButtonText = styled.Text`

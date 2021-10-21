@@ -18,6 +18,10 @@ export const ProductCart = ({ product }: ProductCartProps) => {
   const theme = useContext(ThemeContext);
   const { removeToCart } = useCart();
 
+  const handleRemove = async (product: ProductType) => {
+    await removeToCart(product);
+  };
+
   return (
     <Container>
       <Image source={{ uri: product.thumbnailHd }} />
@@ -25,7 +29,7 @@ export const ProductCart = ({ product }: ProductCartProps) => {
       <Content>
         <Row>
           <Title>{product.title}</Title>
-          <TouchableOpacity onPress={() => removeToCart(product)}>
+          <TouchableOpacity onPress={() => handleRemove(product)}>
             <Feather
               name="trash-2"
               size={RFValue(14)}
