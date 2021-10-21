@@ -19,23 +19,24 @@ export const IconButton = styled.TouchableOpacity`
 export const HeaderText = styled.Text`
   color: ${({ theme }) => theme.colors.white};
   font-size: ${RFValue(20)}px;
-  font-family: CenturyGothic-Bold;
+  font-family: ${({ theme }) => theme.fonts.centuryBold};
 `;
 
 export const Content = styled.View`
   flex: 1;
 `;
 
-export const Footer = styled.View``;
+export const Footer = styled.View`
+  justify-content: flex-end;
+`;
 
 export const Line = styled.View`
-  flex: 1;
   height: 1px;
   background-color: ${({ theme }) => theme.colors.gray};
+  margin: ${RFValue(16)}px 0;
 `;
 
 export const Row = styled.View`
-  flex: 1;
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
@@ -44,7 +45,7 @@ export const Row = styled.View`
 export const Text = styled.Text`
   color: ${({ theme }) => theme.colors.white};
   font-size: ${RFValue(14)}px;
-  font-family: CenturyGothic-Bold;
+  font-family: ${({ theme }) => theme.fonts.centuryBold};
 `;
 
 export const Button = styled.TouchableOpacity`
@@ -59,7 +60,6 @@ export const Button = styled.TouchableOpacity`
 
 export const ButtonText = styled.Text`
   color: ${({ theme }) => theme.colors.white};
-  text-transform: uppercase;
-  font-size: ${RFValue(16)}px;
-  font-family: CenturyGothic-Bold;
+  font-size: ${RFValue(14)}px;
+  font-family: ${({ theme }) => theme.fonts.centuryBold};
 `;

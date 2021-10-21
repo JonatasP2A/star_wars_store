@@ -29,12 +29,12 @@ export const Title = styled.Text`
   width: 80%;
   color: ${({ theme }) => theme.colors.white};
   font-size: ${RFValue(14)}px;
-  font-family: CenturyGothic-Bold;
+  font-family: ${({ theme }) => theme.fonts.centuryBold};
   margin-right: auto;
 `;
 
 export const Price = styled.Text`
   color: ${({ theme }) => theme.colors.primary};
   font-size: ${RFValue(12)}px;
-  font-family: CenturyGothic-Bold;
+  font-family: ${({ theme }) => theme.fonts.centuryBold};
 `;

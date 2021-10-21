@@ -44,7 +44,7 @@ export const Text = styled.Text<ThemeProps>`
       : darkSide.colors.primary};
   text-transform: uppercase;
   font-size: ${RFValue(16)}px;
-  font-family: CenturyGothic-Regular;
+  font-family: ${({ theme }) => theme.fonts.centuryRegular};
 
   margin-bottom: ${RFValue(10)}px;
 `;

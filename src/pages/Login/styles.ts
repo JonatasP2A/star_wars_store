@@ -13,7 +13,7 @@ export const Container = styled.ImageBackground`
 export const LogoText = styled.Text`
   color: ${({ theme }) => theme.colors.yellow};
   font-size: ${RFValue(24)}px;
-  font-family: StarJedi-Regular;
+  font-family: ${({ theme }) => theme.fonts.starJedi};
 `;
 
 export const PhraseContainer = styled.View`
@@ -23,13 +23,13 @@ export const PhraseContainer = styled.View`
 export const Phrase = styled.Text`
   color: ${({ theme }) => theme.colors.white};
   font-size: ${RFValue(14)}px;
-  font-family: CenturyGothic-Bold;
+  font-family: ${({ theme }) => theme.fonts.centuryBold};
 `;
 
 export const Author = styled.Text`
   color: ${({ theme }) => theme.colors.white};
   font-size: ${RFValue(10)}px;
-  font-family: CenturyGothic-Regular;
+  font-family: ${({ theme }) => theme.fonts.centuryRegular};
   margin-left: auto;
 `;
 
@@ -50,7 +50,7 @@ export const Line = styled.View`
 export const Text = styled.Text`
   color: ${({ theme }) => theme.colors.white};
   font-size: ${RFValue(14)}px;
-  font-family: CenturyGothic-Regular;
+  font-family: ${({ theme }) => theme.fonts.centuryRegular};
   margin: 0 ${RFValue(16)}px;
 `;
 

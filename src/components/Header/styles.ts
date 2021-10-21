@@ -29,5 +29,5 @@ export const Circle = styled.View`
 export const Text = styled.Text`
   color: ${({ theme }) => theme.colors.white};
   font-size: ${RFValue(10)}px;
-  font-family: CenturyGothic-Bold;
+  font-family: ${({ theme }) => theme.fonts.centuryBold};
 `;

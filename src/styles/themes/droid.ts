@@ -11,4 +11,10 @@ export default {
     black: '#000',
     yellow: '#FFD500',
   },
+
+  fonts: {
+    centuryRegular: 'CenturyGothic-Regular',
+    centuryBold: 'CenturyGothic-Bold',
+    starJedi: 'StarJedi-Regular',
+  },
 };

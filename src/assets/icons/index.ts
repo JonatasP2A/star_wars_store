@@ -8,3 +8,4 @@ export { default as Apple } from './apple';
 export { default as Facebook } from './facebook';
 export { default as Visa } from './visa';
 export { default as Mastercard } from './mastercard';
+export { default as WellDone } from './wellDone';

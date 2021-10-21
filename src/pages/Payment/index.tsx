@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useRef, useState, useContext } from 'react';
 import {
   StyleSheet,
   Dimensions,
@@ -8,6 +8,10 @@ import {
   TextInput,
   Keyboard,
   ScrollView,
+  ActivityIndicator,
+  Modal,
+  Text,
+  TouchableOpacity,
 } from 'react-native';
 
 import Animated, {
@@ -21,6 +25,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 
 import { Feather } from '@expo/vector-icons';
+import { ThemeContext } from 'styled-components/native';
 import { RFValue } from 'react-native-responsive-fontsize';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { RootStackParamList } from '../../routes/app.routes';
@@ -30,6 +35,7 @@ import { useCart } from '../../hooks/cart';
 
 import { postPurchase } from '../../services/api';
 import { Background, Card } from '../../components';
+import { maskCardValidate } from '../../utils/masks';
 
 import {
   Header,
@@ -42,7 +48,6 @@ import {
   Button,
   ButtonText,
 } from './styles';
-import { maskCardValidate } from '../../utils/masks';
 
 const { width } = Dimensions.get('window');
 
@@ -70,8 +75,12 @@ interface ISubmit {
 type Props = NativeStackScreenProps<RootStackParamList, 'Payment'>;
 
 export const Payment = ({ navigation }: Props) => {
+  const [loading, setLoading] = useState(false);
+  const [modalVisible, setModalVisible] = useState(false);
+
   const { user } = useAuth();
   const { totalCart, products, cleanCart } = useCart();
+  const theme = useContext(ThemeContext);
   const scrollX = useSharedValue(0);
 
   const cardNameInputRef = useRef<TextInput>(null);
@@ -89,6 +98,7 @@ export const Payment = ({ navigation }: Props) => {
   });
 
   const onSubmit = async (data: ISubmit) => {
+    setLoading(true);
     try {
       const idSize = user.id.length;
       const id_user = Number(user.id.slice(idSize - 4, idSize));
@@ -104,8 +114,12 @@ export const Payment = ({ navigation }: Props) => {
       });
 
       cleanCart();
+      setLoading(false);
+      navigation.navigate('Congrats');
     } catch (error) {
       console.log(error);
+      setLoading(false);
+      setModalVisible(true);
     }
   };
 
@@ -129,6 +143,11 @@ export const Payment = ({ navigation }: Props) => {
     scrollX.value = withTiming(0);
   };
 
+  const handleCloseModal = () => {
+    setModalVisible((state) => !state);
+    navigation.navigate('Home');
+  };
+
   return (
     <>
       <Background>
@@ -138,7 +157,7 @@ export const Payment = ({ navigation }: Props) => {
           keyboardVerticalOffset={-300}
           style={{ flex: 1 }}
         >
-          <ScrollView style={{ flex: 1 }}>
+          <ScrollView showsVerticalScrollIndicator={false} style={{ flex: 1 }}>
             <Header>
               <IconButton onPress={() => navigation.goBack()}>
                 <Feather name="chevron-left" size={RFValue(24)} color="#999" />
@@ -171,7 +190,11 @@ export const Payment = ({ navigation }: Props) => {
                 <Input
                   onBlur={onBlur}
                   onFocus={handleInputFocus}
-                  onChangeText={(value) => onChange(value)}
+                  onChangeText={(value) => {
+                    if (value.length <= 16) {
+                      onChange(value);
+                    }
+                  }}
                   value={value}
                   placeholder="Número do cartão"
                   placeholderTextColor="#999"
@@ -301,6 +324,79 @@ export const Payment = ({ navigation }: Props) => {
           <ButtonText>Confirmar pagamento</ButtonText>
         </Button>
       </Background>
+
+      {loading && (
+        <ActivityIndicator
+          color={theme.colors.secondary}
+          size="small"
+          style={{ position: 'absolute', top: 0, bottom: 0, left: 0, right: 0 }}
+        />
+      )}
+
+      <Modal
+        animationType="slide"
+        transparent={true}
+        visible={modalVisible}
+        onRequestClose={handleCloseModal}
+      >
+        <View style={styles.centeredView}>
+          <View style={styles.modalView}>
+            <Text style={styles.modalText}>
+              Ocorreu um erro.{'\n'}Tente novamente mais tade
+            </Text>
+            <TouchableOpacity
+              style={[styles.button, styles.buttonClose]}
+              onPress={handleCloseModal}
+            >
+              <Text style={styles.textStyle}>Fechar</Text>
+            </TouchableOpacity>
+          </View>
+        </View>
+      </Modal>
     </>
   );
 };
+
+const styles = StyleSheet.create({
+  centeredView: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginTop: 22,
+  },
+  modalView: {
+    margin: 20,
+    backgroundColor: 'white',
+    borderRadius: 20,
+    padding: 35,
+    alignItems: 'center',
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 4,
+    elevation: 5,
+  },
+  button: {
+    borderRadius: 20,
+    padding: 10,
+    elevation: 2,
+  },
+  buttonOpen: {
+    backgroundColor: '#F194FF',
+  },
+  buttonClose: {
+    backgroundColor: '#2196F3',
+  },
+  textStyle: {
+    color: 'white',
+    fontWeight: 'bold',
+    textAlign: 'center',
+  },
+  modalText: {
+    marginBottom: 15,
+    textAlign: 'center',
+  },
+});

@@ -21,9 +21,9 @@ export const Image = styled.Image`
 export const ProductName = styled.Text`
   color: ${({ theme }) => theme.colors.primary};
   font-size: ${RFValue(12)}px;
-  font-family: CenturyGothic-Regular;
+  font-family: ${({ theme }) => theme.fonts.centuryRegular};
 `;
 
 export const ProductPrice = styled(ProductName)`
-  font-family: CenturyGothic-Bold;
+  font-family: ${({ theme }) => theme.fonts.centuryBold};
 `;

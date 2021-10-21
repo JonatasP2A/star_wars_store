@@ -6,6 +6,7 @@ import { Profile } from '../pages/Profile';
 import { Product } from '../pages/Product';
 import { Cart } from '../pages/Cart';
 import { Payment } from '../pages/Payment';
+import { Congrats } from '../pages/Congrats';
 
 import { ProductType } from '../types/product';
 
@@ -17,6 +18,7 @@ export type RootStackParamList = {
   Product: { product: ProductType };
   Cart: undefined;
   Payment: undefined;
+  Congrats: undefined;
 };
 
 const AppRoutes: React.FC = () => (
@@ -30,6 +32,7 @@ const AppRoutes: React.FC = () => (
     <App.Screen name="Product" component={Product} />
     <App.Screen name="Cart" component={Cart} />
     <App.Screen name="Payment" component={Payment} />
+    <App.Screen name="Congrats" component={Congrats} />
   </App.Navigator>
 );
 

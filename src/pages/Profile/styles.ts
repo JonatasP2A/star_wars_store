@@ -13,7 +13,7 @@ export const IconButton = styled.TouchableOpacity``;
 export const HeaderText = styled.Text`
   color: ${({ theme }) => theme.colors.white};
   font-size: ${RFValue(20)}px;
-  font-family: CenturyGothic-Bold;
+  font-family: ${({ theme }) => theme.fonts.centuryBold};
 `;
 
 export const Container = styled.View`

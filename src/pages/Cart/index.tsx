@@ -46,13 +46,13 @@ export const Cart = ({ navigation }: Props) => {
         <FlatList
           data={products}
           keyExtractor={(item) => item.title}
+          showsVerticalScrollIndicator={false}
           renderItem={({ item }) => <ProductCart product={item} />}
           contentContainerStyle={{
             paddingVertical: RFValue(48),
           }}
         />
       </Content>
-
       <Footer>
         <Line />
 
@@ -64,7 +64,7 @@ export const Cart = ({ navigation }: Props) => {
         <Line />
 
         <Button onPress={handleContinue}>
-          <ButtonText>CONTINUAR</ButtonText>
+          <ButtonText>Prosseguir</ButtonText>
         </Button>
       </Footer>
     </Background>

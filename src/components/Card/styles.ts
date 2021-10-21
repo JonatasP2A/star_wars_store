@@ -20,7 +20,9 @@ export const Front = styled(LinearGradient)({
   borderRadius: RFValue(16),
 });
 
-export const Top = styled.View``;
+export const Top = styled.View`
+  height: 36px;
+`;
 
 export const CreditCardBrand = styled.View`
   margin-left: auto;

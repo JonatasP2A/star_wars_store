@@ -75,6 +75,20 @@ export const Card = ({ x, control }: CardProps) => {
     };
   });
 
+  const getCardBrandIcon = () => {
+    const masterCardPrefixes = ['51', '52', '53', '54', '55'];
+
+    if (masterCardPrefixes.includes(cardNumber.slice(0, 2))) {
+      return <Mastercard />;
+    }
+
+    if (cardNumber.slice(0, 1) === '4') {
+      return <Visa />;
+    }
+
+    return null;
+  };
+
   return (
     <Container>
       <Animated.View
@@ -113,9 +127,7 @@ export const Card = ({ x, control }: CardProps) => {
       >
         <Front colors={['#B1B1B2', '#6B6B6D']}>
           <Top>
-            <CreditCardBrand>
-              <Mastercard />
-            </CreditCardBrand>
+            <CreditCardBrand>{getCardBrandIcon()}</CreditCardBrand>
           </Top>
           <CreditCardNumber>{cardNumber}</CreditCardNumber>
           <Footer>

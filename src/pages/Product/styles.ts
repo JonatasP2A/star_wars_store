@@ -41,7 +41,7 @@ export const Container = styled.View`
 export const Title = styled.Text`
   color: ${({ theme }) => theme.colors.primary};
   font-size: ${RFValue(20)}px;
-  font-family: CenturyGothic-Bold;
+  font-family: ${({ theme }) => theme.fonts.centuryBold};
   margin-bottom: ${RFValue(24)}px;
 `;
 
@@ -54,13 +54,13 @@ export const Description = styled.Text`
   width: 50%;
   color: ${({ theme }) => theme.colors.primary};
   font-size: ${RFValue(12)}px;
-  font-family: CenturyGothic-Regular;
+  font-family: ${({ theme }) => theme.fonts.centuryRegular};
 `;
 
 export const ProductInfo = styled.Text`
   color: ${({ theme }) => theme.colors.white};
   font-size: ${RFValue(12)}px;
-  font-family: CenturyGothic-Regular;
+  font-family: ${({ theme }) => theme.fonts.centuryRegular};
 `;
 
 export const Footer = styled.View`
@@ -74,7 +74,7 @@ export const Footer = styled.View`
 export const PriceText = styled.Text`
   color: ${({ theme }) => theme.colors.primary};
   font-size: ${RFValue(14)}px;
-  font-family: CenturyGothic-Bold;
+  font-family: ${({ theme }) => theme.fonts.centuryBold};
 `;
 
 export const CardButton = styled.TouchableOpacity`
@@ -88,7 +88,7 @@ export const CardButton = styled.TouchableOpacity`
 export const CardText = styled.Text<CardTextProps>`
   color: ${({ theme, remove }) => (remove ? '#E3656E' : theme.colors.black)};
   font-size: ${RFValue(12)}px;
-  font-family: CenturyGothic-Bold;
+  font-family: ${({ theme }) => theme.fonts.centuryBold};
   margin-left: ${RFValue(8)}px;
   text-align: center;
 `;
