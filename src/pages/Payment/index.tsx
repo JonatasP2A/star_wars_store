@@ -199,6 +199,7 @@ export const Payment = ({ navigation }: Props) => {
                   placeholder="Número do cartão"
                   placeholderTextColor="#999"
                   keyboardType="numeric"
+                  returnKeyType="next"
                   onSubmitEditing={() => {
                     cardNameInputRef.current?.focus();
                   }}
@@ -224,6 +225,7 @@ export const Payment = ({ navigation }: Props) => {
                   value={value}
                   placeholder="Nome do titular"
                   placeholderTextColor="#999"
+                  returnKeyType="next"
                   onSubmitEditing={() => {
                     validInputRef.current?.focus();
                   }}
@@ -254,6 +256,7 @@ export const Payment = ({ navigation }: Props) => {
                       placeholder="Validade"
                       placeholderTextColor="#999"
                       keyboardType="numeric"
+                      returnKeyType="next"
                       onSubmitEditing={() => {
                         const month = Number(value.slice(0, 2));
                         if (month < 1 || month > 12) {
@@ -309,6 +312,7 @@ export const Payment = ({ navigation }: Props) => {
                       value={value}
                       placeholder="CCV"
                       placeholderTextColor="#999"
+                      returnKeyType="send"
                       keyboardType="number-pad"
                     />
                   )}

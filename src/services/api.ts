@@ -1,8 +1,6 @@
 import axios from 'axios';
 import { IPurchase } from '../types/cart';
-
-const { BASE_URL_STORE } = process.env;
-const { BASE_URL_PURCHASES } = process.env;
+import { IHistoric } from '../types/product';
 
 const apiProducts = axios.create({
   baseURL:
@@ -18,8 +16,8 @@ export const getProducts = () => {
   return apiProducts.get('/products.json');
 };
 
-export const getHistoric = () => {
-  return apiCart.get('/mobile-challenge-get');
+export const getHistoric = ({ id_user }: IHistoric) => {
+  return apiCart.get('/mobile-challenge-get', { params: { id_user } });
 };
 
 // POST

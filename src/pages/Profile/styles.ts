@@ -17,7 +17,17 @@ export const HeaderText = styled.Text`
 `;
 
 export const Container = styled.View`
+  flex: 1;
+`;
+
+export const Row = styled.View`
   flex-direction: row;
   justify-content: space-between;
-  margin-top: ${RFValue(32)}px;
+  margin: ${RFValue(32)}px 0;
+`;
+
+export const Title = styled.Text`
+  color: ${({ theme }) => theme.colors.white};
+  font-size: ${RFValue(14)}px;
+  font-family: ${({ theme }) => theme.fonts.centuryRegular};
 `;

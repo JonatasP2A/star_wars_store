@@ -6,3 +6,7 @@ export type ProductType = {
   title: string;
   zipcode: string;
 };
+
+export interface IHistoric {
+  id_user: number;
+}

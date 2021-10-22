@@ -1,18 +1,42 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { RFValue } from 'react-native-responsive-fontsize';
 import { Feather } from '@expo/vector-icons';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { RootStackParamList } from '../../routes/app.routes';
 
+import { useAuth } from '../../hooks/auth';
+import { getHistoric } from '../../services/api';
 import { Background, BoxTheme } from '../../components';
 
-import { Header, IconButton, HeaderText, Container } from './styles';
-import { useAuth } from '../../hooks/auth';
+import {
+  Header,
+  IconButton,
+  HeaderText,
+  Container,
+  Row,
+  Title,
+} from './styles';
 
 type Props = NativeStackScreenProps<RootStackParamList, 'Profile'>;
 
 export const Profile = ({ navigation }: Props) => {
-  const { logOut } = useAuth();
+  const { logOut, user } = useAuth();
+
+  const getData = async () => {
+    try {
+      const idSize = user.id.length;
+      const id_user = Number(user.id.slice(idSize - 4, idSize));
+
+      const response = await getHistoric({ id_user });
+      console.log(response);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    getData();
+  }, []);
 
   return (
     <Background>
@@ -27,9 +51,13 @@ export const Profile = ({ navigation }: Props) => {
       </Header>
 
       <Container>
-        <BoxTheme type="droid" />
-        <BoxTheme type="lightSide" />
-        <BoxTheme type="darkSide" />
+        <Row>
+          <BoxTheme type="droid" />
+          <BoxTheme type="lightSide" />
+          <BoxTheme type="darkSide" />
+        </Row>
+
+        <Title>Histórico de compras</Title>
       </Container>
     </Background>
   );
