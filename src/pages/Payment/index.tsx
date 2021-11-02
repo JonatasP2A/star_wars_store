@@ -196,6 +196,7 @@ export const Payment = ({ navigation }: Props) => {
                     }
                   }}
                   value={value}
+                  maxLength={19}
                   placeholder="Número do cartão"
                   placeholderTextColor="#999"
                   keyboardType="numeric"
@@ -253,6 +254,7 @@ export const Payment = ({ navigation }: Props) => {
                         onChange(maskCardValidate(value));
                       }}
                       value={value}
+                      maxLength={5}
                       placeholder="Validade"
                       placeholderTextColor="#999"
                       keyboardType="numeric"
@@ -310,6 +312,7 @@ export const Payment = ({ navigation }: Props) => {
                         }
                       }}
                       value={value}
+                      maxLength={3}
                       placeholder="CCV"
                       placeholderTextColor="#999"
                       returnKeyType="send"
