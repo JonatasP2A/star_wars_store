@@ -1,4 +1,7 @@
 import React, { useContext } from 'react';
+import { Dimensions } from 'react-native';
+import { SharedElement } from 'react-navigation-shared-element';
+import Constants from 'expo-constants';
 import { Feather } from '@expo/vector-icons';
 import { ThemeContext } from 'styled-components';
 import { RFValue } from 'react-native-responsive-fontsize';
@@ -13,6 +16,8 @@ import { currencyFormat } from '../../utils/format';
 import * as S from './styles';
 
 type Props = NativeStackScreenProps<RootStackParamList, 'Product'>;
+
+const { width, height } = Dimensions.get('window');
 
 export const Product = ({ route, navigation }: Props) => {
   const { product } = route.params;
@@ -36,7 +41,21 @@ export const Product = ({ route, navigation }: Props) => {
           color={theme.colors.white}
         />
       </S.IconButton>
-      <S.Image source={{ uri: product.thumbnailHd }} />
+
+      <SharedElement
+        id={product.title}
+        style={{
+          height: height * 0.45,
+          width,
+          position: 'absolute',
+          top: Constants.statusBarHeight,
+          left: 0,
+          zIndex: 10,
+        }}
+      >
+        <S.Image source={{ uri: product.thumbnailHd }} />
+      </SharedElement>
+
       <S.Container>
         <S.Title>{product.title}</S.Title>
 

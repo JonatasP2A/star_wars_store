@@ -12,8 +12,8 @@ interface CardTextProps {
 export const Image = styled.Image`
   height: ${height * 0.45}px;
   width: ${width}px;
-  position: absolute;
-  top: ${Constants.statusBarHeight}px;
+  /* position: absolute; */
+  /* top: ${Constants.statusBarHeight}px; */
   left: 0;
   z-index: 10;
 `;

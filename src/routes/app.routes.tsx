@@ -1,5 +1,6 @@
 import React from 'react';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { createSharedElementStackNavigator } from 'react-navigation-shared-element';
 
 import { Home } from '../pages/Home';
 import { Profile } from '../pages/Profile';
@@ -21,13 +22,36 @@ export type RootStackParamList = {
   Congrats: undefined;
 };
 
+const Stack = createSharedElementStackNavigator();
+
+const SharedScreens = () => {
+  return (
+    <Stack.Navigator
+      initialRouteName="Home"
+      screenOptions={{
+        headerShown: false,
+      }}
+    >
+      <Stack.Screen name="Home" component={Home} />
+      <Stack.Screen
+        name="Product"
+        component={Product}
+        sharedElements={(route, otherRoute, showing) => {
+          const { product } = route.params;
+          return [product.title];
+        }}
+      />
+    </Stack.Navigator>
+  );
+};
+
 const AppRoutes: React.FC = () => (
   <App.Navigator
     screenOptions={{
       headerShown: false,
     }}
   >
-    <App.Screen name="Home" component={Home} />
+    <App.Screen name="Initial" component={SharedScreens} />
     <App.Screen name="Profile" component={Profile} />
     <App.Screen name="Product" component={Product} />
     <App.Screen name="Cart" component={Cart} />

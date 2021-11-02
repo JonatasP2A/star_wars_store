@@ -1,4 +1,6 @@
 import React from 'react';
+import { SharedElement } from 'react-navigation-shared-element';
+
 import { ProductType } from '../../types/product';
 import { currencyFormat } from '../../utils/format';
 
@@ -12,7 +14,9 @@ interface ProductProps {
 export const Product = ({ product, onPress }: ProductProps) => {
   return (
     <Container onPress={onPress}>
-      <Image source={{ uri: product.thumbnailHd }} />
+      <SharedElement id={product.title} style={{ flex: 1 }}>
+        <Image source={{ uri: product.thumbnailHd }} />
+      </SharedElement>
 
       <ProductName>{product.title}</ProductName>
       <ProductPrice>{currencyFormat(product.price)}</ProductPrice>
