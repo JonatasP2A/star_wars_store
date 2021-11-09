@@ -4,6 +4,7 @@ import * as Font from 'expo-font';
 import { NavigationContainer } from '@react-navigation/native';
 import { StatusBar } from 'expo-status-bar';
 import { ThemeContext } from 'styled-components';
+import { navigationRef } from '../../routes/app.routes';
 
 type FontSource = Parameters<typeof Font.loadAsync>[0];
 const usePromiseAll = (
@@ -42,7 +43,7 @@ const LoadAssets = ({ assets, fonts, children }: LoadAssetsProps) => {
   }
 
   return (
-    <NavigationContainer>
+    <NavigationContainer ref={navigationRef}>
       <StatusBar backgroundColor={theme.colors.background} />
       {children}
     </NavigationContainer>

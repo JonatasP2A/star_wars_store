@@ -27,8 +27,7 @@ import * as yup from 'yup';
 import { Feather } from '@expo/vector-icons';
 import { ThemeContext } from 'styled-components/native';
 import { RFValue } from 'react-native-responsive-fontsize';
-import { NativeStackScreenProps } from '@react-navigation/native-stack';
-import { RootStackParamList } from '../../routes/app.routes';
+import { goBack, navigate } from '../../routes/app.routes';
 
 import { useAuth } from '../../hooks/auth';
 import { useCart } from '../../hooks/cart';
@@ -72,9 +71,7 @@ interface ISubmit {
   ccv: string;
 }
 
-type Props = NativeStackScreenProps<RootStackParamList, 'Payment'>;
-
-export const Payment = ({ navigation }: Props) => {
+export const Payment = () => {
   const [loading, setLoading] = useState(false);
   const [modalVisible, setModalVisible] = useState(false);
 
@@ -115,7 +112,7 @@ export const Payment = ({ navigation }: Props) => {
 
       cleanCart();
       setLoading(false);
-      navigation.navigate('Congrats');
+      navigate('Congrats', undefined);
     } catch (error) {
       console.log(error);
       setLoading(false);
@@ -145,7 +142,7 @@ export const Payment = ({ navigation }: Props) => {
 
   const handleCloseModal = () => {
     setModalVisible((state) => !state);
-    navigation.navigate('Home');
+    navigate('Home', undefined);
   };
 
   return (
@@ -159,7 +156,7 @@ export const Payment = ({ navigation }: Props) => {
         >
           <ScrollView showsVerticalScrollIndicator={false} style={{ flex: 1 }}>
             <Header>
-              <IconButton onPress={() => navigation.goBack()}>
+              <IconButton onPress={() => goBack()}>
                 <Feather name="chevron-left" size={RFValue(24)} color="#999" />
               </IconButton>
               <HeaderText>Pagamento</HeaderText>

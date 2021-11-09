@@ -1,8 +1,7 @@
 import React, { useEffect } from 'react';
 import { RFValue } from 'react-native-responsive-fontsize';
 import { Feather } from '@expo/vector-icons';
-import { NativeStackScreenProps } from '@react-navigation/native-stack';
-import { RootStackParamList } from '../../routes/app.routes';
+import { navigate } from '../../routes/app.routes';
 
 import { useAuth } from '../../hooks/auth';
 import { getHistoric } from '../../services/api';
@@ -17,9 +16,7 @@ import {
   Title,
 } from './styles';
 
-type Props = NativeStackScreenProps<RootStackParamList, 'Profile'>;
-
-export const Profile = ({ navigation }: Props) => {
+export const Profile = () => {
   const { logOut, user } = useAuth();
 
   const getData = async () => {
@@ -41,7 +38,7 @@ export const Profile = ({ navigation }: Props) => {
   return (
     <Background>
       <Header>
-        <IconButton onPress={() => navigation.navigate('Home')}>
+        <IconButton onPress={() => navigate('Home', undefined)}>
           <Feather name="chevron-left" size={RFValue(24)} color="#FFF" />
         </IconButton>
         <HeaderText>Profile</HeaderText>

@@ -2,8 +2,7 @@ import React from 'react';
 import { FlatList } from 'react-native';
 import { RFValue } from 'react-native-responsive-fontsize';
 import { Feather } from '@expo/vector-icons';
-import { NativeStackScreenProps } from '@react-navigation/native-stack';
-import { RootStackParamList } from '../../routes/app.routes';
+import { goBack, navigate } from '../../routes/app.routes';
 
 import { useCart } from '../../hooks/cart';
 import { Background, ProductCart } from '../../components';
@@ -22,21 +21,19 @@ import {
   ButtonText,
 } from './styles';
 
-type Props = NativeStackScreenProps<RootStackParamList, 'Cart'>;
-
-export const Cart = ({ navigation }: Props) => {
+export const Cart = () => {
   const { products, totalCart } = useCart();
 
   const handleContinue = () => {
     if (products.length > 0) {
-      navigation.navigate('Payment');
+      navigate('Payment', undefined);
     }
   };
 
   return (
     <Background>
       <Header>
-        <IconButton onPress={() => navigation.goBack()}>
+        <IconButton onPress={() => goBack()}>
           <Feather name="chevron-left" size={RFValue(24)} color="#FFF" />
         </IconButton>
         <HeaderText>Carrinho</HeaderText>

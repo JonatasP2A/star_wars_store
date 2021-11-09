@@ -1,5 +1,6 @@
 import React from 'react';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { createNavigationContainerRef } from '@react-navigation/native';
 import { createSharedElementStackNavigator } from 'react-navigation-shared-element';
 
 import { Home } from '../pages/Home';
@@ -23,6 +24,23 @@ export type RootStackParamList = {
 };
 
 const Stack = createSharedElementStackNavigator();
+
+export const navigationRef = createNavigationContainerRef<RootStackParamList>();
+
+export function navigate<T extends keyof RootStackParamList>(
+  name: T,
+  params: RootStackParamList[T]
+) {
+  if (navigationRef.current?.isReady()) {
+    navigationRef.current?.navigate<keyof RootStackParamList>(name, params);
+  }
+}
+
+export function goBack() {
+  if (navigationRef.current?.isReady() && navigationRef.current?.canGoBack()) {
+    navigationRef.current?.goBack();
+  }
+}
 
 const SharedScreens = () => {
   return (

@@ -8,19 +8,20 @@ import { Yoda, Robot, Stormtrooper, Logo } from '../../assets/icons';
 
 import { Container, Cart, Circle, Text } from './styles';
 import { useCart } from '../../hooks/cart';
+import { navigate } from '../../routes/app.routes';
 
-interface HeaderProps {
-  goToProfile: () => void;
-  goToCart: () => void;
-}
+// interface HeaderProps {
+//   goToProfile: () => void;
+//   goToCart: () => void;
+// }
 
-export const Header = ({ goToProfile, goToCart }: HeaderProps) => {
+export const Header = () => {
   const theme = useContext(ThemeContext);
   const { products } = useCart();
 
   return (
     <Container>
-      <TouchableOpacity onPress={goToProfile}>
+      <TouchableOpacity onPress={() => navigate('Profile', undefined)}>
         {theme.title === 'droid' ? (
           <Robot />
         ) : theme.title === 'darkSide' ? (
@@ -31,7 +32,7 @@ export const Header = ({ goToProfile, goToCart }: HeaderProps) => {
       </TouchableOpacity>
 
       <Logo color={theme.colors.primary} />
-      <Cart onPress={goToCart}>
+      <Cart onPress={() => navigate('Cart', undefined)}>
         <Feather
           name="shopping-cart"
           size={RFValue(24)}

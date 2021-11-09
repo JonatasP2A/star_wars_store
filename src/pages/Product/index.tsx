@@ -6,7 +6,7 @@ import { Feather } from '@expo/vector-icons';
 import { ThemeContext } from 'styled-components';
 import { RFValue } from 'react-native-responsive-fontsize';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
-import { RootStackParamList } from '../../routes/app.routes';
+import { goBack, RootStackParamList } from '../../routes/app.routes';
 
 import { useCart } from '../../hooks/cart';
 import { Background } from '../../components';
@@ -19,7 +19,7 @@ type Props = NativeStackScreenProps<RootStackParamList, 'Product'>;
 
 const { width, height } = Dimensions.get('window');
 
-export const Product = ({ route, navigation }: Props) => {
+export const Product = ({ route }: Props) => {
   const { product } = route.params;
   const theme = useContext(ThemeContext);
   const { products, addToCart, removeToCart } = useCart();
@@ -34,7 +34,7 @@ export const Product = ({ route, navigation }: Props) => {
 
   return (
     <Background>
-      <S.IconButton onPress={() => navigation.goBack()}>
+      <S.IconButton onPress={() => goBack()}>
         <Feather
           name="arrow-left"
           size={RFValue(24)}
