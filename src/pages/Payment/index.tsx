@@ -27,7 +27,7 @@ import * as yup from 'yup';
 import { Feather } from '@expo/vector-icons';
 import { ThemeContext } from 'styled-components/native';
 import { RFValue } from 'react-native-responsive-fontsize';
-import { goBack, navigate } from '../../routes/app.routes';
+import { goBack, navigate } from '../../routes/NavigationService';
 
 import { useAuth } from '../../hooks/auth';
 import { useCart } from '../../hooks/cart';

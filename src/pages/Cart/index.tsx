@@ -2,7 +2,7 @@ import React from 'react';
 import { FlatList } from 'react-native';
 import { RFValue } from 'react-native-responsive-fontsize';
 import { Feather } from '@expo/vector-icons';
-import { goBack, navigate } from '../../routes/app.routes';
+import { goBack, navigate } from '../../routes/NavigationService';
 
 import { useCart } from '../../hooks/cart';
 import { Background, ProductCart } from '../../components';

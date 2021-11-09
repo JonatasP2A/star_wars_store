@@ -6,7 +6,8 @@ import { Feather } from '@expo/vector-icons';
 import { ThemeContext } from 'styled-components';
 import { RFValue } from 'react-native-responsive-fontsize';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
-import { goBack, RootStackParamList } from '../../routes/app.routes';
+import { RootStackParamList } from '../../routes/app.routes';
+import { goBack } from '../../routes/NavigationService';
 
 import { useCart } from '../../hooks/cart';
 import { Background } from '../../components';

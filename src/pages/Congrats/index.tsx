@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import { Feather } from '@expo/vector-icons';
 import { ThemeContext } from 'styled-components';
-import { navigate } from '../../routes/app.routes';
+import { navigate } from '../../routes/NavigationService';
 
 import { WellDone } from '../../assets/icons';
 import { Background } from '../../components';

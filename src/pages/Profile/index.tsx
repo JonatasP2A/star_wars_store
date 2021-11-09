@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { RFValue } from 'react-native-responsive-fontsize';
 import { Feather } from '@expo/vector-icons';
-import { navigate } from '../../routes/app.routes';
+import { navigate } from '../../routes/NavigationService';
 
 import { useAuth } from '../../hooks/auth';
 import { getHistoric } from '../../services/api';

@@ -1,6 +1,6 @@
 import React from 'react';
 import { SharedElement } from 'react-navigation-shared-element';
-import { navigate } from '../../routes/app.routes';
+import { navigate } from '../../routes/NavigationService';
 
 import { ProductType } from '../../types/product';
 import { currencyFormat } from '../../utils/format';

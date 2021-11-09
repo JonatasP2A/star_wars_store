@@ -8,12 +8,7 @@ import { Yoda, Robot, Stormtrooper, Logo } from '../../assets/icons';
 
 import { Container, Cart, Circle, Text } from './styles';
 import { useCart } from '../../hooks/cart';
-import { navigate } from '../../routes/app.routes';
-
-// interface HeaderProps {
-//   goToProfile: () => void;
-//   goToCart: () => void;
-// }
+import { navigate } from '../../routes/NavigationService';
 
 export const Header = () => {
   const theme = useContext(ThemeContext);
