@@ -8,7 +8,7 @@ export function navigate<T extends keyof RootStackParamList>(
   params: RootStackParamList[T]
 ) {
   if (navigationRef.current?.isReady()) {
-    navigationRef.current?.navigate<keyof RootStackParamList>(name, params);
+    navigationRef.current?.navigate<T>(name, params);
   }
 }
 
